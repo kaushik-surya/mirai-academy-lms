@@ -1,0 +1,12 @@
+{
+  "name": "mirai-academy-lms",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"cd backend && mvn spring-boot:run\" \"cd frontend && npm run dev\"",
+    "frontend": "cd frontend && npm run dev",
+    "backend": "cd backend && mvn spring-boot:run"
+  }
+}
