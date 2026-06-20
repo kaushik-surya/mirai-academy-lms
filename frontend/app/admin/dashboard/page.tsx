@@ -69,7 +69,7 @@ export default function AdminDashboard() {
       return;
     }
     const parsedUser = JSON.parse(storedUser);
-    if (parsedUser.role !== 'admin') {
+    if (parsedUser.role?.toUpperCase() !== 'ADMIN') {
       router.push('/login');
       return;
     }
