@@ -77,7 +77,7 @@ export default function StudentDashboard() {
       return;
     }
     const parsedUser = JSON.parse(storedUser);
-    if (parsedUser.role !== 'student') {
+    if (parsedUser.role?.toUpperCase() !== 'STUDENT') {
       router.push('/login');
       return;
     }

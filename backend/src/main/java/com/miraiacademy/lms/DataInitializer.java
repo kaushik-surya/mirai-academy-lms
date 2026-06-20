@@ -35,7 +35,7 @@ public class DataInitializer implements CommandLineRunner {
 
         User admin = new User();
         admin.setEmail("admin@miraiacademy.com");
-        admin.setPassword(passwordEncoder.encode("admin@123"));
+        admin.setPassword(passwordEncoder.encode("admin123"));
         admin.setName("Admin User");
         admin.setRole(Role.ADMIN);
         admin.setActive(true);

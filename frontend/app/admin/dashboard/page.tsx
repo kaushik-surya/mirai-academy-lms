@@ -69,10 +69,10 @@ export default function AdminDashboard() {
       return;
     }
     const parsedUser = JSON.parse(storedUser);
-    if (parsedUser.role !== 'admin') {
-      router.push('/login');
-      return;
-    }
+    if (parsedUser.role?.toLowerCase() !== 'admin') {
+  router.push('/login');
+  return;
+}
     setUser(parsedUser);
 
     const token = localStorage.getItem('token');

@@ -58,7 +58,7 @@ export default function StaffDashboard() {
       return;
     }
     const parsedUser = JSON.parse(storedUser);
-    if (parsedUser.role !== 'staff') {
+    if (parsedUser.role?.toUpperCase() !== 'STAFF') {
       router.push('/login');
       return;
     }
