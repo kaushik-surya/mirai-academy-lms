@@ -31,43 +31,68 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) {
         // Create Admin
+  if (userRepository.findByEmail("admin@miraiacademy.com").isEmpty()) {
+
         User admin = new User();
         admin.setEmail("admin@miraiacademy.com");
-        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setPassword(passwordEncoder.encode("admin@123"));
         admin.setName("Admin User");
         admin.setRole(Role.ADMIN);
         admin.setActive(true);
         admin.setCreatedAt(LocalDateTime.now());
         admin.setPhone("+81-90-1234-5678");
+
         userRepository.save(admin);
 
+        System.out.println("✓ Admin user created");
+    } else {
+        System.out.println("✓ Admin user already exists");
+    }
+
         // Create Staff/Instructor
-        User instructor = new User();
-        instructor.setEmail("teacher@miraiacademy.com");
-        instructor.setPassword(passwordEncoder.encode("teacher123"));
-        instructor.setName("Tanaka Sensei");
-        instructor.setRole(Role.STAFF);
-        instructor.setActive(true);
-        instructor.setCreatedAt(LocalDateTime.now());
-        instructor.setPhone("+81-90-8765-4321");
-        instructor.setSpecialization("Japanese Language");
-        instructor.setStaffId("STF001");
-        instructor.setJoiningDate(LocalDateTime.now());
-        instructor.setSalary(500000.0);
-        userRepository.save(instructor);
+
+        User instructor;
+  if (userRepository.findByEmail("teacher@miraiacademy.com").isEmpty()) {
+    instructor = new User();
+    instructor.setEmail("teacher@miraiacademy.com");
+    instructor.setPassword(passwordEncoder.encode("teacher123"));
+    instructor.setName("Tanaka Sensei");
+    instructor.setRole(Role.STAFF);
+    instructor.setActive(true);
+    instructor.setCreatedAt(LocalDateTime.now());
+    instructor.setPhone("+81-90-8765-4321");
+    instructor.setSpecialization("Japanese Language");
+    instructor.setStaffId("STF001");
+    instructor.setJoiningDate(LocalDateTime.now());
+    instructor.setSalary(500000.0);
+
+    userRepository.save(instructor);
+    System.out.println("✓ Teacher created");
+} else {
+    instructor = userRepository.findByEmail("teacher@miraiacademy.com").get();
+    System.out.println("✓ Teacher already exists");
+}
 
         // Create Student
-        User student = new User();
-        student.setEmail("student@miraiacademy.com");
-        student.setPassword(passwordEncoder.encode("student123"));
-        student.setName("John Doe");
-        student.setRole(Role.STUDENT);
-        student.setActive(true);
-        student.setCreatedAt(LocalDateTime.now());
-        student.setPhone("+81-80-1111-2222");
-        student.setStudentId("STU001");
-        student.setEnrollmentDate(LocalDateTime.now());
-        userRepository.save(student);
+if (userRepository.findByEmail("student@miraiacademy.com").isEmpty()) {
+
+    User student = new User();
+    student.setEmail("student@miraiacademy.com");
+    student.setPassword(passwordEncoder.encode("student123"));
+    student.setName("John Doe");
+    student.setRole(Role.STUDENT);
+    student.setActive(true);
+    student.setCreatedAt(LocalDateTime.now());
+    student.setPhone("+81-80-1111-2222");
+    student.setStudentId("STU001");
+    student.setEnrollmentDate(LocalDateTime.now());
+
+    userRepository.save(student);
+
+    System.out.println("✓ Student created");
+} else {
+    System.out.println("✓ Student already exists");
+}
 
         // Create Courses
         Course japaneseN5 = new Course();

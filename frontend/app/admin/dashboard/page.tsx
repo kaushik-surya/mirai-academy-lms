@@ -15,18 +15,14 @@ interface User {
 }
 
 interface Stats {
-  totalUsers: number;
-  totalByRole: {
-    admin: number;
-    staff: number;
-    student: number;
-  };
-  onlineByRole: {
-    admin: number;
-    staff: number;
-    student: number;
-  };
-  activeSince: string;
+  totalStudents: number;
+  totalStaff: number;
+  totalCourses: number;
+  totalEnrollments: number;
+  monthlyRevenue: number | string;
+  pendingPayments: number;
+  activeCourses: number;
+  recentActivities: Array<any>;
 }
 
 const stats = [
@@ -112,7 +108,7 @@ export default function AdminDashboard() {
       })
       .finally(() => setLoadingUsers(false));
 
-    fetch(`${apiUrl}/stats`, {
+    fetch(`${apiUrl}/admin/dashboard/stats`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -131,7 +127,9 @@ export default function AdminDashboard() {
         return response.json();
       })
       .then((data) => {
-        setStatsData(data);
+        // normalize numeric values
+        if (data.monthlyRevenue) data.monthlyRevenue = Number(data.monthlyRevenue || 0);
+        setStatsData(data as any);
       })
       .catch((error) => {
         setStatsError(error.message || 'Unable to load stats');
@@ -239,15 +237,15 @@ export default function AdminDashboard() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Admin</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.totalByRole.admin}</span>
+                    <span className="text-xl font-bold text-primary-700">{statsData.totalAdmins}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Staff</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.totalByRole.staff}</span>
+                    <span className="text-xl font-bold text-primary-700">{statsData.totalStaff}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Students</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.totalByRole.student}</span>
+                    <span className="text-xl font-bold text-primary-700">{statsData.totalStudents}</span>
                   </div>
                 </div>
               ) : (
@@ -262,15 +260,15 @@ export default function AdminDashboard() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Admin</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.onlineByRole.admin}</span>
+                    <span className="text-xl font-bold text-primary-700">{(statsData as any).onlineByRole?.admin ?? 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Staff</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.onlineByRole.staff}</span>
+                    <span className="text-xl font-bold text-primary-700">{(statsData as any).onlineByRole?.staff ?? 0}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Students</span>
-                    <span className="text-xl font-bold text-primary-700">{statsData.onlineByRole.student}</span>
+                    <span className="text-xl font-bold text-primary-700">{(statsData as any).onlineByRole?.student ?? 0}</span>
                   </div>
                 </div>
               ) : (
