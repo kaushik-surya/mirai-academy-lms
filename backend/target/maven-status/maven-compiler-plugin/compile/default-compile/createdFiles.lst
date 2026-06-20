@@ -1,3 +1,4 @@
+com/.DS_Store
 com/miraiacademy/lms/entity/Course.class
 com/miraiacademy/lms/repository/BatchRepository.class
 com/miraiacademy/lms/entity/Role.class
@@ -5,9 +6,11 @@ com/miraiacademy/lms/controller/ApiInfoController.class
 com/miraiacademy/lms/entity/Attendance.class
 com/miraiacademy/lms/controller/AdminController.class
 com/miraiacademy/lms/entity/Enrollment$PaymentStatus.class
+com/miraiacademy/.DS_Store
 com/miraiacademy/lms/repository/UserRepository.class
 com/miraiacademy/lms/entity/Enrollment.class
 com/miraiacademy/lms/repository/CourseRepository.class
+.DS_Store
 com/miraiacademy/lms/security/CustomUserDetailsService.class
 com/miraiacademy/lms/entity/Meeting.class
 com/miraiacademy/lms/controller/AuthController.class
